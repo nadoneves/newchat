@@ -43,7 +43,7 @@ io.sockets.on('connection', function(socket)
     // Adicionar o usuário para a lista global onde os usuários loja
 		usuariosOnline[username] = socket.username;
     // Mostra o cliente que está conectado
-		socket.emit("refreshChat", "Eu", "Bem vindo " + socket.username + ".");
+		socket.emit("refreshChat", "eu", "Bem vindo " + socket.username + ".");
     // Mostra a nível global para todos os usuários de um usuário
     // Basta ligar para conversar
 		socket.broadcast.emit("refreshChat", "conectado", "O usuário " + socket.username + " entrou no chat.");
