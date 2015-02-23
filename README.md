@@ -4,7 +4,7 @@ Um chat onde a ideia é a diversão e .
 
 # Authors
 
-André Carlos
+André Santos
 
 Carlos Alberto
 
