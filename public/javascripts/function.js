@@ -83,24 +83,66 @@ $(function()
 
     $('.sendMsg').on("click", function()
     {
-        SendMessage();
+        SendMessage("texto");
+    });
+
+    $('.sendImg').on("click", function()
+    {
+        SendMessage("img");
+    });
+
+    $('.sendVideo').on("click", function()
+    {
+        SendMessage("video");
     });
 
     $('.message').on('keypress', function(e) {
         if ( e.which == 13 ) {
-            SendMessage();
+            SendMessage("texto");
+        }
+    });
+    $('.messageImg').on('keypress', function(e) {
+        if ( e.which == 13 ) {
+            SendMessage("img");
+        }
+    });
+    $('.messageVideo').on('keypress', function(e) {
+        if ( e.which == 13 ) {
+            SendMessage("video");
         }
     });
 
 });
 
-function SendMessage()
+function fts_antixss(string1)
 {
-    var message = $(".message").val();
+  tam = string1.length;
+
+  string2 = string1.replace(/</g,"&#60");
+  string1 = string2.replace(/>/g,"&#62");
+
+  return string1;
+}
+
+function SendMessage(p)
+{
+    var message = "";
+    if(p == "img")
+        message = "<img src='"+fts_antixss($(".messageImg").val())+"'>";
+    else if(p == "video")
+        message = "<iframe width='420' height='315' src='"+fts_antixss($(".messageVideo").val().replace('watch?v=', 'embed/'))+"?rel=0&controls=0&showinfo=0' frameborder='0' allowfullscreen></iframe>";
+    else
+        message = fts_antixss($(".message").val());
+
     if(message.length >= 2)
     {
         socket.emit("addNewMessage", message);
-        $(".message").val("");
+        if(p == "img")
+            $(".messageImg").val("");
+        else if(p == "video")
+            $(".messageVideo").val("");
+        else
+            $(".message").val("");
     }
     else
     {
