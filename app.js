@@ -2,7 +2,8 @@ var express = require("express"),
 http = require("http"),
 app = express(),
 server = http.createServer(app),
-path = require('path');
+path = require('path'),
+fs = require('fs');;
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -25,12 +26,19 @@ var usuariosOnline = {};
 
 var io = require("socket.io").listen(server);
 
+function DataHora()
+{
+	var Hoje = new Date();
+	var dia = Hoje.getFullYear() + '-' + (Hoje.getMonth() + 1) + '-' + Hoje.getDate();
+	return dia + " " + Hoje.getHours() + ":" + Hoje.getMinutes() + ":" + Hoje.getSeconds();
+}
+
 // Para conectar um usuário || socket, este evento é predefinido pelo socketio
 io.sockets.on('connection', function(socket)
 {
   // Quando o usuário se conecta a conversar verificar se você está conectado
   // parâmetro é a sessão de login armazenados com sessionStorage
-	socket.on("loginUser", function(username)
+	socket.on("loginUser", function(username, ip)
 	{
     // Se existor o nome de usuário no bate-papo
 		if(usuariosOnline[username])
@@ -40,6 +48,7 @@ io.sockets.on('connection', function(socket)
 		}
     // Salva o nome do usuário na sessão para esta tomada de cliente
 		socket.username = username;
+		socket.ip = ip;
     // Adicionar o usuário para a lista global onde os usuários loja
 		usuariosOnline[username] = socket.username;
     // Mostra o cliente que está conectado
@@ -49,6 +58,18 @@ io.sockets.on('connection', function(socket)
 		socket.broadcast.emit("refreshChat", "conectado", "O usuário " + socket.username + " entrou no chat.");
     // Atualiza a lista de usuários no lado do cliente de bate-papo
 		io.sockets.emit("updateSidebarUsers", usuariosOnline);
+
+		var msg = socket.username +" ("+ ip + ")||" + DataHora() +" In\n";
+
+	  	fs.readFile('logs/inout.log', function(err, data){
+			if(err){ throw err; }
+		    else
+		    {
+		      fs.writeFile('logs/inout.log', data + msg, function(err){
+		        if(err){ throw err; }
+		      });
+		    }
+	  	});
 	});
 
   // Quando um usuário envia uma nova mensagem, o parâmetro é o
@@ -62,6 +83,17 @@ io.sockets.on('connection', function(socket)
 		socket.emit("refreshChat", "msg", "Eu : " + message + ".");
     // Com socket.broadcast.emit, é para outros usuários
 		socket.broadcast.emit("refreshChat", "msg", socket.username + " diz: " + message + ".");
+
+		var msg = socket.username +" ("+ socket.ip + ")||" + DataHora() +" diz: " + message + "  ENDMSG\n";
+		fs.readFile('logs/messages.log', function(err, data){
+		    if(err){ throw err; }
+		    else
+		    {
+		      fs.writeFile('logs/messages.log', data + msg, function(err){
+		        if(err){ throw err; }
+		      });
+		    }
+	  	});
 	});
 
   // Quando o usuário fecha o navegador ou atualização
@@ -80,5 +112,17 @@ io.sockets.on('connection', function(socket)
 		io.sockets.emit("updateSidebarUsers", usuariosOnline);
     // Emitir mensagem global para todos os que estão ligados com as transmissões
 		socket.broadcast.emit("refreshChat", "desconectado", "O usuário " + socket.username + " saiu do chat.");
+
+		var msg = socket.username +" ("+ socket.ip + ")||" + DataHora() +" Out\n";
+
+	  	fs.readFile('logs/inout.log', function(err, data){
+		    if(err){ throw err; }
+		    else
+		    {
+		      fs.writeFile('logs/inout.log', data + msg, function(err){
+		        if(err){ throw err; }
+		      });
+		    }
+		});
 	});
 });
