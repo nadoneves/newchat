@@ -12,14 +12,14 @@
 }
 
 #containerMessages,#containerUsers{
-	height: 500px !important;
+	height: 100% !important;
 	overflow-y: scroll;
-	border: 1px solid #eee;
-	/*margin-bottom: 15px;*/
-	background: #fff;
+	/*border: 1px solid #eee;
+	margin-bottom: 15px;
+	background: #fff;*/
 }
 
-.message{
+.message, .messageImg, .messageVideo{
 	padding: 5px 2px;
 	border: 1px solid #eee;
 	border-radius: 6px;

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+
+    <!-- Bootstrap -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/stylesheets/style.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+
+
+    <div class="row" style="padding:0;margin:0">
+
+        <!-- Topo -->
+        <div class="" style="   background: #fff;
+                                border:1px solid #ccc;
+                                height: 50px;
+                                width:80%;
+                                top:0;
+                                display:block;
+                                position:fixed;
+                                z-index:1000;
+                                box-shadow: 10px 3px 5px 0px #888888;">
+        </div>
+
+        <!-- Mensagens -->
+        <div class="" style="   background: url('public/img/body-bg.png') #333;
+                                border:0px solid blue;
+                                height: 75%;
+                                width:80%;
+                                top: 52px;
+                                position: fixed;
+                                z-index:0;
+                                padding: 10px;">
+            <div  id="containerMessages">
+              <div id="chatMsgs"></div>
+            </div>
+        </div>
+
+        <!-- Inputs -->
+        <div class="" style="   background: #fff;
+                                border-top:1px solid #ccc;
+                                height: 200px;
+                                width:80%;
+                                bottom:0;
+                                display:block;
+                                position:fixed;
+                                z-index:1000;
+                                padding:10px">
+            <ul class="nav nav-tabs">
+                <li role="presentation" id="liTexto" class="active"><a href="#">Texto</a></li>
+                <li role="presentation" id="liImg"><a href="#">Img</a></li>
+                <li role="presentation" id="liVideo"><a href="#">Video</a></li>
+            </ul>
+            <div id="texto" style="padding: 10px">
+                <input type="text" class="message input-lg" style="width: 91%" name="name" value="" placeholder="Digite aqui sua mensagem...">
+                <input type="button" class="btn btn-lg btn-primary sendMsg" name="name" value="Enviar">
+            </div>
+            <div id="img" style="padding: 10px" class="hide">
+                <input type="text" class="messageImg input-lg" style="width: 91%" name="name" value="" placeholder="Digite aqui a url da imagem...">
+                <input type="button" class="btn btn-lg btn-primary sendImg" name="name" value="Enviar">
+            </div>
+            <div id="video" style="padding: 10px" class="hide">
+                <input type="text" class="messageVideo input-lg" style="width: 91%" name="name" value="" placeholder="Digite aqui a url do seu video...">
+                <input type="button" class="btn btn-lg btn-primary sendVideo" name="name" value="Enviar">
+            </div>
+        </div>
+
+        <div style="   background: #fff;
+                                border-top:1px solid #ccc;
+                                height: 70px;
+                                width:80%;
+                                bottom:0;
+                                display:block;
+                                position:fixed;
+                                z-index:1000;
+                                padding:10px">
+
+        </div>
+
+        <!-- Usuários -->
+        <div class="" style="   background: rgb(28,28,28);
+                                        border:1px solid black;
+                                        height: 1000px;
+                                        width:20%;
+                                        right:0;
+                                        display:block;
+                                        position:fixed;
+                                        z-index:1000;
+                                        padding:0">
+
+            <div class="" style="   background: rgb(29,31,34);
+                                    height: 50px;
+                                    width: 100%;
+                                    font-size: 24px;
+                                    text-align: center;
+                                    color: #fff;">
+                Usuários
+            </div>
+            <div id="containerUsers" style="padding:10px;">
+              <div id="chatUsers"></div>
+            </div>
+        </div>
+
+        <div id="formModal" class="modal in" aria-hidden="false" style="display: block;">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h2 class="title-modal" style="text-align: center;">Formulario de início de sessão</h2>
+              </div>
+              <div class="modal-body">
+                <p class="formModal">
+                </p>
+              </div>
+              <div class="modal-footer"></div>
+            </div>
+          </div>
+        </div>
+
+    </div> <!-- End Row -->
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/javascripts/function.js"></script>
+    <script charset="utf-8">
+        $(function(){
+            $('#liTexto').on('click', function(){
+                $("#img, #video").addClass("hide");
+                $("#liImg, #liVideo").removeClass("active");
+                $("#texto").removeClass("hide");
+                $("#liTexto").addClass("active");
+            });
+            $('#liImg').on('click', function(){
+                $("#texto, #video").addClass("hide");
+                $("#liTexto, #liVideo").removeClass("active");
+                $("#img").removeClass("hide");
+                $("#liImg").addClass("active");
+            });
+            $('#liVideo').on('click', function(){
+                $("#texto, #img").addClass("hide");
+                $("#liImg, #liTexto").removeClass("active");
+                $("#video").removeClass("hide");
+                $("#liVideo").addClass("active");
+            });
+        });
+    </script>
+  </body>
+</html>
