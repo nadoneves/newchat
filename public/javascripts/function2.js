@@ -110,7 +110,7 @@ $(function()
 
     socket.on("updateSidebarUsers", function(usersOnline)
     {
-        $(".chatUsers").html("");
+        //$(".chatUsers").html("");
         if(!isEmptyObject(usersOnline))
         {
             $.each(usersOnline, function(key, val)

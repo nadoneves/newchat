@@ -22,13 +22,13 @@
 			    {
 			        padding:5px;
 			        border-bottom:1px solid #ddd;
-			        margin:0;			        
+			        margin:0;
 			    }
 
 			    .message-wrap
 			    {
 			        box-shadow: 0 0 3px #ddd;
-			        padding:0;	       
+			        padding:0;
 			    }
 			    .msg
 			    {
@@ -130,8 +130,8 @@
 			    body::-webkit-scrollbar {
 			        width: 12px;
 			    }
-			 
-			    
+
+
 			    /* Let's get this party started */
 			    ::-webkit-scrollbar {
 			        width: 6px;
@@ -139,7 +139,7 @@
 
 			    /* Track */
 			    ::-webkit-scrollbar-track {
-			        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+			        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 			/*        -webkit-border-radius: 10px;
 			        border-radius: 10px;*/
 			    }
@@ -148,24 +148,43 @@
 			    ::-webkit-scrollbar-thumb {
 			/*        -webkit-border-radius: 10px;
 			        border-radius: 10px;*/
-			        background:#ddd; 
-			        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+			        background:#ddd;
+			        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
 			    }
 			    ::-webkit-scrollbar-thumb:window-inactive {
-			        background: #ddd; 
+			        background: #ddd;
 			    }
 
-			    #containerMessages,#containerUsers{			    	
+			    #containerMessages,#containerUsers{
 					min-height: 100% !important;
 					max-height: 100% !important;
-					overflow-y: scroll;					
+					overflow-y: scroll;
+				}
+
+				#index-banner{
+					height: 50px;
+				}
+				@media screen and (min-width : 720px) {
+					#containerMainMsg{
+						width: 376px;
+					}
+				}
+				@media screen and (min-width : 993px) {
+					#containerMainMsg{
+						width: 124%;
+					}
+				}
+				@media screen and (min-width: 1200px) {
+					#containerMainMsg{
+						width: 134% !important;
+					}
 				}
 		</style>
     <!-- Bootstrap -->
     <!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
     <link href="/stylesheets/style.css" rel="stylesheet"> -->
-    
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -188,15 +207,16 @@
 	<header>
 
 		<div class="container">
-
-			<a href="#" data-activates="nav-mobile" class="button-collapse top-nav full"><i class="mdi-navigation-menu"></i></a>
+			<a href="#" data-activates="nav-mobile" class="button-collapse top-nav"><i class="mdi-navigation-menu"></i></a>
 			</a>
 		</div>
 
 		<!-- <div class="conversation-wrap col-lg-3" id="containerUsers"> -->
             <ul id="nav-mobile" class="side-nav fixed chatUsers">
             	<li class="logo">
-            		<a id="logo-container" class="brand-logo"></a>
+            		<a id="logo-container" class="brand-logo">
+						<i class="medium mdi-action-question-answer"></i>
+					</a>
             	</li>
             </ul>
         <!-- </div> -->
@@ -206,12 +226,12 @@
 		<div class="section" id='index-banner'>
 			<div class="container">
 				<div class="row">
-					<h1>ddd</h1>
+					<span style="font-size: 20px">NewChat</span><small style="color: #555">beta</small>
 				</div>
 			</div>
 
 		</div>
-		<div class="container">
+		<div class="container" id="containerMainMsg">
 		    <div class="row">
 		        <div class="message-wrap col s12 m9 l10">
 		            <div class="msg-wrap">
@@ -230,7 +250,6 @@
 					    </div>
 		            </div>
 		            <div class="btn-panel">
-		                <a href="" class=" col-lg-3 btn   send-message-btn " role="button"><i class="fa fa-cloud-upload"></i> Add Files</a>
 		                <a href="javascript: void(0);" class=" col-lg-4 text-right btn   send-message-btn pull-right sendMsg" role="button"><i class="fa fa-plus"></i> Send Message</a>
 		            </div>
 		        </div>
@@ -239,11 +258,11 @@
 
 	</main>
 	<footer></footer>
-		
+
 	<!-- -->
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 
-	
+
 
 
 	<div id="formModal" class="modal in" aria-hidden="false" style="display: block;">
