@@ -16,7 +16,7 @@ app.get("/", function(req,res){
 	//res.render("index.jade", {title : "Chat"});
   // para testar o de cima em index.jade deve conter apenas
   // include index.html
-  res.sendfile("view/index.html");
+  res.sendfile("view/index2.html");
 });
 
 server.listen(3000);
@@ -80,9 +80,9 @@ io.sockets.on('connection', function(socket)
     // Fazemos isso quando o usuário pressiona o botão para enviar uma nova mensagem ao chat
 
     // Com socket.emit, a mensagem é para mim
-		socket.emit("refreshChat", "msg", "Eu : " + message + ".");
+		socket.emit("refreshChat", "msg", "Eu <sep> " + message + ".");
     // Com socket.broadcast.emit, é para outros usuários
-		socket.broadcast.emit("refreshChat", "msg", socket.username + " diz: " + message + ".");
+		socket.broadcast.emit("refreshChat", "msg", socket.username + " <sep> " + message + ".");
 
 		var msg = socket.username +" ("+ socket.ip + ")||" + DataHora() +" diz: " + message + "  ENDMSG\n";
 		fs.readFile('logs/messages.log', function(err, data){

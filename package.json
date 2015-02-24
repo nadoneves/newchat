@@ -5,9 +5,11 @@
   "main": "main.js",
   "author": "André Santos / Carlos Alberto / Leonardo Neves",
   "license": "ISC",
-  "dependencies":
-  {
+  "dependencies": {
     "express": "3.4.3",
     "socket.io": "~0.9.16"
+  },
+  "devDependencies": {
+    "ember-cli-materialize": "^0.3.0"
   }
 }

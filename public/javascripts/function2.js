@@ -25,7 +25,7 @@ function myIP() {
 function animateScroll()
 {
     var container = $('#containerMessages');
-    container.animate({"scrollTop": $('#containerMessages')[0].scrollHeight}, "slow");
+    //container.animate({"scrollTop": $('#containerMessages')[0].scrollHeight}, "slow");
 }
 
 $(function()
@@ -55,7 +55,7 @@ $(function()
 
         socket.emit("loginUser", manageSessions.get("login"),manageSessions.get("ip"));
 
-        $("#formModal").modal("hide");
+        $("#formModal").closeModal();
         animateScroll();
     });
 
@@ -80,7 +80,16 @@ $(function()
         }
         else if(action == "msg")
         {
-            $("#chatMsgs").append("<p class='col-md-12 alert-warning'>" + message + "</p>");
+            $("#chatMsgs").append("<div class='media msg'> " + 
+                    "<a class='pull-left' href=''> " +
+                        "<img class='media-object' data-src='holder.js/64x64' alt='64x64' style='width: 32px; height: 32px;'' src='../public/img/user6464.png'>" +
+                    "</a>" +
+                    "<div class='media-body'>" +
+                        "<small class='pull-right time'><i class='fa fa-clock-o'></i> 12:10am</small>" +
+                        "<h5 class='media-heading'>" + message.split('<sep>')[0] + "</h5>" +
+                        "<small class='col-lg-10'>" + message.split('<sep>')[1] + "</small>" +
+                    "</div>" +
+                "</div>");
         }
         else if(action == "eu")
         {
@@ -91,12 +100,18 @@ $(function()
 
     socket.on("updateSidebarUsers", function(usersOnline)
     {
-        $("#chatUsers").html("");
+        $(".chatUsers").html("");
         if(!isEmptyObject(usersOnline))
         {
             $.each(usersOnline, function(key, val)
             {
-                $("#chatUsers").append("<p class='col-md-12 alert-info'>" + key + "</p>");
+                $(".chatUsers").append('<li class="media conversation bold"> ' +
+                        '<a class="pull-left" href="#">' +
+                        '</a>' +
+                        '<div class="media-body">' +
+                            '<h6 class="media-heading">' + key + '</h6>' +
+                        '</div>' +
+                    '</li>');
             })
         }
     });
@@ -179,11 +194,13 @@ function showModal(title,message,showClose)
     if(showClose == "true")
     {
         $(".modal-footer").html('<a data-dismiss="modal" aria-hidden="true" class="btn btn-danger">Fechar</a>');
-        $("#formModal").modal({show:true});
+        //$("#formModal").modal({show:true});
+        $("#formModal").openModal();
     }
     else
     {
-        $("#formModal").modal({show:true, backdrop: 'static', keyboard: true });
+        //$("#formModal").modal({show:true, backdrop: 'static', keyboard: true });
+        $("#formModal").openModal();
     }
 }
 
