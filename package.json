@@ -2,7 +2,7 @@
   "name": "newchat",
   "version": "1.0.0",
   "description": "Um chat onde a ideia é a diversão e .",
-  "main": "main.js",
+  "main": "app.js",
   "author": "André Santos / Carlos Alberto / Leonardo Neves",
   "license": "ISC",
   "dependencies":
