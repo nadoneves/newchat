@@ -1,4 +1,4 @@
-var socket = io.connect('http://192.168.123.196:3000');
+var socket = io.connect('http://192.168.123.140:3000');
 
 $(document).ready(function()
 {
@@ -25,7 +25,7 @@ function myIP() {
 function animateScroll()
 {
     var container = $('#containerMessages');
-    //container.animate({"scrollTop": $('#containerMessages')[0].scrollHeight}, "slow");
+    container.animate({"scrollTop": $('#containerMessages')[0].scrollHeight}, "slow");
 }
 
 $(function()
@@ -72,28 +72,38 @@ $(function()
     {
         if(action == "conectado")
         {
-            $("#chatMsgs").append("<p class='col-md-12 alert-info'>" + message + "</p>");
+            $("#chatMsgs").append("<div class='card-panel teal accent-3'>" + message + "</div>");
         }
         else if(action == "desconectado")
         {
-            $("#chatMsgs").append("<p class='col-md-12 alert-danger'>" + message + "</p>");
+            $("#chatMsgs").append("<div class='card-panel red accent-2'>" + message + "</div>");
         }
         else if(action == "msg")
         {
-            $("#chatMsgs").append("<div class='media msg'> " + 
-                    "<a class='pull-left' href=''> " +
-                        "<img class='media-object' data-src='holder.js/64x64' alt='64x64' style='width: 32px; height: 32px;'' src='../public/img/user6464.png'>" +
-                    "</a>" +
-                    "<div class='media-body'>" +
-                        "<small class='pull-right time'><i class='fa fa-clock-o'></i> 12:10am</small>" +
-                        "<h5 class='media-heading'>" + message.split('<sep>')[0] + "</h5>" +
-                        "<small class='col-lg-10'>" + message.split('<sep>')[1] + "</small>" +
-                    "</div>" +
+            if(message.split('<sep>')[0] == "Eu")
+            {
+                $("#chatMsgs").append("<div class='card-panel blue-grey lighten-5'> " +
+                        "<div class='media-body'>" +
+                            "<small class='pull-right time'><i class='fa fa-clock-o'></i> " + message.split('<sep>')[1] + "</small>" +
+                            "<h6 class='media-heading'>" + message.split('<sep>')[0] + "</h6>" +
+                            "<small class='col-lg-10'>" + message.split('<sep>')[2] + "</small>" +
+                        "</div>" +
+                    "</div>");
+            }
+            else
+            {
+                $("#chatMsgs").append("<div class='card-panel orange lighten-5'> " +
+                "<div class='media-body'>" +
+                "<small class='pull-right time'><i class='fa fa-clock-o'></i> " + message.split('<sep>')[1] + "</small>" +
+                "<h6 class='media-heading'>" + message.split('<sep>')[0] + "</h6>" +
+                "<small class='col-lg-10'>" + message.split('<sep>')[2] + "</small>" +
+                "</div>" +
                 "</div>");
+            }
         }
         else if(action == "eu")
         {
-            $("#chatMsgs").append("<p class='col-md-12 alert-success'>" + message + "</p>");
+            $("#chatMsgs").append("<div class='card-panel teal lighten-2'>" + message + "</div>");
         }
         animateScroll();
     });

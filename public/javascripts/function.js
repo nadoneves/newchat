@@ -1,4 +1,4 @@
-var socket = io.connect('http://192.168.123.196:3000');
+var socket = io.connect('http://192.168.123.140:3000');
 
 $(document).ready(function()
 {
