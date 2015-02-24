@@ -1,3 +1,27 @@
+.messageBox{
+	height: 75%;
+}
+/* Small devices (tablets, 768px and up) */
+@media screen and (min-width: 768px) {
+	.messageBox{
+		height: 75%;
+	}
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media screen and (min-width: 992px) {
+	.messageBox{
+		height: 64%;
+	}
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media screen and (min-width: 1200px) {
+	.messageBox{
+		height: 63%;
+	}
+}
+
 #title{
 	text-align: center;
 }
