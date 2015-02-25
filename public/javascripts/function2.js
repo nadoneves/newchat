@@ -117,9 +117,10 @@ $(function()
 
     socket.on("updateSidebarUsers", function(usersOnline)
     {
-        $(".chatUsers").html('<li class="logo"><a id="logo-container" class="brand-logo"><i class="medium mdi-action-question-answer"></i></a></li>');
+        $(".chatUsers").html('');
         if(!isEmptyObject(usersOnline))
         {
+            var uOnline = 0;
             $.each(usersOnline, function(key, val)
             {
                 $(".chatUsers").append('<li id="liUsers" class="media conversation bold"> ' +
@@ -129,7 +130,9 @@ $(function()
                             '<h6 class="media-heading">' + key + '</h6>' +
                         '</div>' +
                     '</li>');
-            })
+                uOnline++;
+            });
+            $('h5#usersOn').html(uOnline);
         }
     });
 
