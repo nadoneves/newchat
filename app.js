@@ -42,15 +42,17 @@ io.sockets.on('connection', function(socket)
 	{
     // Se existor o nome de usuário no bate-papo
 		if(usuariosOnline[username])
-		{
-			socket.emit("userInUse");
-			return;
+		{			
+			socket.username = username+"_" + Math.floor((Math.random() * Date.now()) + 1);
 		}
-    // Salva o nome do usuário na sessão para esta tomada de cliente
-		socket.username = username;
+		else
+    	{
+			// Salva o nome do usuário na sessão para esta tomada de cliente
+			socket.username = username;
+		}
 		socket.ip = ip;
     // Adicionar o usuário para a lista global onde os usuários loja
-		usuariosOnline[username] = socket.username;
+		usuariosOnline[socket.username] = socket.username;
     // Mostra o cliente que está conectado
 		socket.emit("refreshChat", "eu", "Bem vindo " + socket.username + ".");
     // Mostra a nível global para todos os usuários de um usuário

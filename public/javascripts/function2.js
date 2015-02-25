@@ -44,13 +44,13 @@ $(function()
     $("#loginBtn").on("click", function(e)
     {
         e.preventDefault();
-        if($(".username").val().length < 2)
+        if($(".username").val().trim().replace(' ','_').length < 2)
         {
             $(".errorMsg").hide();
             $(".username").after("<div class='card-panel red accent-2'>Insira um nome para entrar.</div>").focus();
             return;
         }
-        manageSessions.set("login", $(".username").val());
+        manageSessions.set("login", $(".username").val().trim().replace(' ','_'));
         manageSessions.set("ip", myIP());
 
         socket.emit("loginUser", manageSessions.get("login"),manageSessions.get("ip"));
@@ -61,9 +61,9 @@ $(function()
 
     socket.on("userInUse", function()
     {
-        //$("#formModal").modal("show");
+        showModal();
         manageSessions.unset("login");
-        //$(".errorMsg").hide();
+        $(".errorMsg").hide();
         $(".username").after("<div class='card-panel red accent-2'>Nome de Usuário em uso.</div>").focus();
         return;
     });
@@ -215,7 +215,7 @@ function showModal(title,message,showClose)
         //$("#formModal").modal({show:true, backdrop: 'static', keyboard: true });
         $("#formModal").openModal({
           dismissible: false, // Modal can be dismissed by clicking outside of the modal
-          opacity: .5
+          opacity: 2
         }
       );
     }
