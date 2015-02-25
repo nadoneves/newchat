@@ -19,7 +19,7 @@ app.get("/", function(req,res){
   res.sendfile("view/index2.html");
 });
 
-server.listen(3000);
+server.listen(5000);
 
 // objeto para armazenar na sessão do soquete para o qual você vai se conectar
 var usuariosOnline = {};
@@ -42,7 +42,7 @@ io.sockets.on('connection', function(socket)
 	{
     // Se existor o nome de usuário no bate-papo
 		if(usuariosOnline[username])
-		{			
+		{
 			socket.username = username+"_" + Math.floor((Math.random() * Date.now()) + 1);
 		}
 		else
