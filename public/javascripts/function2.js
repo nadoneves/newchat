@@ -3,6 +3,10 @@ var socket = io.connect('http://192.168.1.9:3000');
 $(document).ready(function()
 {
     manageSessions.unset("login");
+
+    $(window).resize(function(){
+        console.log($(window).height());
+    });
 });
 
 function myIP() {
