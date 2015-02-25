@@ -8,178 +8,170 @@
     <title></title>
     <link href="/stylesheets/ghpages-materialize.css" rel="stylesheet">
 
-    	<style type="text/css">
+	<style type="text/css">
+	    .conversation-wrap
+	    {
+	        box-shadow: -2px 0 3px #ddd;
+	        padding:0;
+	        min-height: 200px;
+	        max-height: 400px;
+	        overflow: auto;
+	    }
+	    .conversation
+	    {
+	        padding:5px;
+	        border-bottom:1px solid #ddd;
+	        margin:0;
+	    }
 
-		    .conversation-wrap
-			    {
-			        box-shadow: -2px 0 3px #ddd;
-			        padding:0;
-			        min-height: 200px;
-			        max-height: 400px;
-			        overflow: auto;
-			    }
-			    .conversation
-			    {
-			        padding:5px;
-			        border-bottom:1px solid #ddd;
-			        margin:0;
-			    }
+	    .message-wrap
+	    {
+	        box-shadow: 0 0 3px #ddd;
+	        padding:0;
+	    }
+	    .msg
+	    {
+	        padding:5px;
+	        /*border-bottom:1px solid #ddd;*/
+	        margin:0;
+	    }
+	    .msg-wrap
+	    {
+	        padding:10px;
+	        min-height: 200px;
+	        max-height: 400px;
+	        height: 400px;
+	    }
 
-			    .message-wrap
-			    {
-			        box-shadow: 0 0 3px #ddd;
-			        padding:0;
-			    }
-			    .msg
-			    {
-			        padding:5px;
-			        /*border-bottom:1px solid #ddd;*/
-			        margin:0;
-			    }
-			    .msg-wrap
-			    {
-			        padding:10px;
-			        min-height: 200px;
-			        max-height: 400px;
-			        height: 400px;
-			    }
+	    .time
+	    {
+	        color:#bfbfbf;
+	    }
 
-			    .time
-			    {
-			        color:#bfbfbf;
-			    }
+	    .send-wrap
+	    {
+	        border-top: 1px solid #eee;
+	        border-bottom: 1px solid #eee;
+	        padding:10px;
+	        /*background: #f8f8f8;*/
+	    }
 
-			    .send-wrap
-			    {
-			        border-top: 1px solid #eee;
-			        border-bottom: 1px solid #eee;
-			        padding:10px;
-			        /*background: #f8f8f8;*/
-			    }
+	    .send-message
+	    {
+	        resize: none;
+	    }
 
-			    .send-message
-			    {
-			        resize: none;
-			    }
+	    .highlight
+	    {
+	        background-color: #f7f7f9;
+	        border: 1px solid #e1e1e8;
+	    }
 
-			    .highlight
-			    {
-			        background-color: #f7f7f9;
-			        border: 1px solid #e1e1e8;
-			    }
+	    .send-message-btn
+	    {
+	        border-top-left-radius: 0;
+	        border-top-right-radius: 0;
+	        border-bottom-left-radius: 0;
 
-			    .send-message-btn
-			    {
-			        border-top-left-radius: 0;
-			        border-top-right-radius: 0;
-			        border-bottom-left-radius: 0;
+	        border-bottom-right-radius: 0;
+	    }
+	    .btn-panel
+	    {
+	        background: #f7f7f9;
+	    }
 
-			        border-bottom-right-radius: 0;
-			    }
-			    .btn-panel
-			    {
-			        background: #f7f7f9;
-			    }
+	    .btn-panel .btn
+	    {
+	        color:#b8b8b8;
 
-			    .btn-panel .btn
-			    {
-			        color:#b8b8b8;
+	        transition: 0.2s all ease-in-out;
+	    }
 
-			        transition: 0.2s all ease-in-out;
-			    }
+	    .btn-panel .btn:hover
+	    {
+	        color:#666;
+	        background: #f8f8f8;
+	    }
+	    .btn-panel .btn:active
+	    {
+	        background: #f8f8f8;
+	        box-shadow: 0 0 1px #ddd;
+	    }
 
-			    .btn-panel .btn:hover
-			    {
-			        color:#666;
-			        background: #f8f8f8;
-			    }
-			    .btn-panel .btn:active
-			    {
-			        background: #f8f8f8;
-			        box-shadow: 0 0 1px #ddd;
-			    }
+	    .btn-panel-conversation .btn,.btn-panel-msg .btn
+	    {
 
-			    .btn-panel-conversation .btn,.btn-panel-msg .btn
-			    {
+	        background: #f8f8f8;
+	    }
+	    .btn-panel-conversation .btn:first-child
+	    {
+	        border-right: 1px solid #ddd;
+	    }
 
-			        background: #f8f8f8;
-			    }
-			    .btn-panel-conversation .btn:first-child
-			    {
-			        border-right: 1px solid #ddd;
-			    }
-
-			    .msg-wrap .media-heading
-			    {
-			        color:#003bb3;
-			        font-weight: 700;
-			    }
-
-
-			    .msg-date
-			    {
-			        background: none;
-			        text-align: center;
-			        color:#aaa;
-			        border:none;
-			        box-shadow: none;
-			        border-bottom: 1px solid #ddd;
-			    }
+	    .msg-wrap .media-heading
+	    {
+	        color:#003bb3;
+	        font-weight: 700;
+	    }
 
 
-			    body::-webkit-scrollbar {
-			        width: 12px;
-			    }
+	    .msg-date
+	    {
+	        background: none;
+	        text-align: center;
+	        color:#aaa;
+	        border:none;
+	        box-shadow: none;
+	        border-bottom: 1px solid #ddd;
+	    }
 
 
-			    /* Let's get this party started */
-			    ::-webkit-scrollbar {
-			        width: 6px;
-			    }
+	    body::-webkit-scrollbar {
+	        width: 12px;
+	    }
 
-			    /* Track */
-			    ::-webkit-scrollbar-track {
-			        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-			/*        -webkit-border-radius: 10px;
-			        border-radius: 10px;*/
-			    }
 
-			    /* Handle */
-			    ::-webkit-scrollbar-thumb {
-			/*        -webkit-border-radius: 10px;
-			        border-radius: 10px;*/
-			        background:#ddd;
-			        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
-			    }
-			    ::-webkit-scrollbar-thumb:window-inactive {
-			        background: #ddd;
-			    }
+	    /* Let's get this party started */
+	    ::-webkit-scrollbar {
+	        width: 6px;
+	    }
 
-			    #containerMessages,#containerUsers{
-					min-height: 100% !important;
-					max-height: 100% !important;
-					overflow-y: scroll;
-				}
+	    /* Track */
+	    ::-webkit-scrollbar-track {
+	        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+		/*  -webkit-border-radius: 10px;
+	    	border-radius: 10px;*/
+	    }
 
-				#index-banner{
-					height: 50px;
-				}
-				@media screen and (min-width : 720px) {
-					#containerMainMsg{
-						width: 376px;
-					}
-				}
-				@media screen and (min-width : 993px) {
-					#containerMainMsg{
-						width: 124%;
-					}
-				}
-				@media screen and (min-width: 1200px) {
-					#containerMainMsg{
-						width: 134% !important;
-					}
-				}
-		</style>
+	    /* Handle */
+	    ::-webkit-scrollbar-thumb {
+		/*  -webkit-border-radius: 10px;
+	        border-radius: 10px;*/
+	        background:#ddd;
+	        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+	    }
+	    ::-webkit-scrollbar-thumb:window-inactive {
+	        background: #ddd;
+	    }
+
+	    #containerMessages,#containerUsers{
+			min-height: 100% !important;
+			max-height: 100% !important;
+			overflow-y: scroll;
+		}
+
+		#index-banner{
+			height: 50px;
+		}
+
+		.button-collapse{
+			left:0 !important;
+		}
+
+		#containerMainMsg{
+			width: 100%;
+		}
+	</style>
     <!-- Bootstrap -->
     <!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
@@ -203,25 +195,18 @@
 </head>
 <body>
 
-	<!-- -->
 	<header>
-
 		<div class="container">
 			<a href="#" data-activates="nav-mobile" class="button-collapse top-nav"><i class="mdi-navigation-menu"></i></a>
 			</a>
 		</div>
 
-		<!-- <div class="conversation-wrap col-lg-3" id="containerUsers"> -->
-            <ul id="nav-mobile" class="side-nav fixed chatUsers">
-            	<li class="logo">
-            		<a id="logo-container" class="brand-logo">
-						<i class="medium mdi-action-question-answer"></i>
-					</a>
-            	</li>
-            </ul>
-        <!-- </div> -->
 
+        <ul id="nav-mobile" class="side-nav fixed chatUsers">
+        	
+        </ul>
 	</header>
+
 	<main>
 		<div class="section" id='index-banner'>
 			<div class="container">
@@ -229,28 +214,25 @@
 					<span style="font-size: 20px">NewChat</span><small style="color: #555">beta</small>
 				</div>
 			</div>
-
 		</div>
-		<div class="container" id="containerMainMsg">
+
+		<div class="container">
 		    <div class="row">
-		        <div class="message-wrap col s12 m9 l10">
-		            <div class="msg-wrap">
+		        <div class="message-wrap col s12 m9 l10" id="containerMainMsg">
+		            <div class="msg-wrap" >
 		                <div id="containerMessages">
 		                	<div id="chatMsgs"></div>
 		                </div>
 		            </div>
 
 		            <div class="send-wrap ">
-
-		                <!-- <input type="text" class="form-control send-message message" rows="3" placeholder="Write a reply..."> -->
-
 		                <div class="input-field col s12">
 					        <input id="username" type="text" class="validate message">
 					        <label for="username">Digite sua mensagem</label>
 					    </div>
 		            </div>
 		            <div class="btn-panel">
-		                <a href="javascript: void(0);" class=" col-lg-4 text-right btn   send-message-btn pull-right sendMsg" role="button"><i class="fa fa-plus"></i> Send Message</a>
+		                <a href="javascript: void(0);" class=" col-lg-4 text-right btn send-message-btn pull-right sendMsg" role="button"><i class="fa fa-plus"></i> Send Message</a>
 		            </div>
 		        </div>
 		    </div>
@@ -258,11 +240,6 @@
 
 	</main>
 	<footer></footer>
-
-	<!-- -->
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-
-
 
 
 	<div id="formModal" class="modal in" aria-hidden="false" style="display: block;">

@@ -1,4 +1,4 @@
-var socket = io.connect('http://192.168.123.140:3000');
+var socket = io.connect('http://192.168.1.9:3000');
 
 $(document).ready(function()
 {
@@ -31,7 +31,7 @@ function animateScroll()
 $(function()
 {
     animateScroll();
-    showModal("Formulario de início de sessão",renderForm());
+    showModal("Newchat",renderForm());
     $("#containerSendMessages, #containerSendMessages input").on("focus click", function(e)
     {
         e.preventDefault();
@@ -47,7 +47,7 @@ $(function()
         if($(".username").val().length < 2)
         {
             $(".errorMsg").hide();
-            $(".username").after("<div class='col-md-12 alert alert-danger errorMsg'>Insira um nome para entrar no chat.</div>").focus();
+            $(".username").after("<div class='card-panel red accent-2'>Insira um nome para entrar.</div>").focus();
             return;
         }
         manageSessions.set("login", $(".username").val());
@@ -61,10 +61,10 @@ $(function()
 
     socket.on("userInUse", function()
     {
-        $("#formModal").modal("show");
+        //$("#formModal").modal("show");
         manageSessions.unset("login");
-        $(".errorMsg").hide();
-        $(".username").after("<div class='col-md-12 alert alert-danger errorMsg'>Nome de Usuário em uso.</div>").focus();
+        //$(".errorMsg").hide();
+        $(".username").after("<div class='card-panel red accent-2'>Nome de Usuário em uso.</div>").focus();
         return;
     });
 
@@ -110,12 +110,12 @@ $(function()
 
     socket.on("updateSidebarUsers", function(usersOnline)
     {
-        //$(".chatUsers").html("");
+        $(".chatUsers").html('<li class="logo"><a id="logo-container" class="brand-logo"><i class="medium mdi-action-question-answer"></i></a></li>');
         if(!isEmptyObject(usersOnline))
         {
             $.each(usersOnline, function(key, val)
             {
-                $(".chatUsers").append('<li class="media conversation bold"> ' +
+                $(".chatUsers").append('<li id="liUsers" class="media conversation bold"> ' +
                         '<a class="pull-left" href="#">' +
                         '</a>' +
                         '<div class="media-body">' +
@@ -191,7 +191,7 @@ function SendMessage(p)
     }
     else
     {
-        showModal("Erro","<p class='alert alert-danger'>A mensagem deve conter pelo menos 2 caracteres.</p>", "true");
+        showModal("Erro","<p class='card-panel red accent-2'>A mensagem deve conter pelo menos 2 caracteres.</p>", "true");
     }
     animateScroll();
 }
@@ -203,14 +203,21 @@ function showModal(title,message,showClose)
     $("p.formModal").html(message);
     if(showClose == "true")
     {
-        $(".modal-footer").html('<a data-dismiss="modal" aria-hidden="true" class="btn btn-danger">Fechar</a>');
+        $(".modal-footer").html('<a href="javascript: $(\'#formModal\').closeModal();" class="btn btn-danger">Fechar</a>');
         //$("#formModal").modal({show:true});
-        $("#formModal").openModal();
+        $("#formModal").openModal({
+          dismissible: false, // Modal can be dismissed by clicking outside of the modal
+          opacity: .5
+        });
     }
     else
     {
         //$("#formModal").modal({show:true, backdrop: 'static', keyboard: true });
-        $("#formModal").openModal();
+        $("#formModal").openModal({
+          dismissible: false, // Modal can be dismissed by clicking outside of the modal
+          opacity: .5
+        }
+      );
     }
 }
 
