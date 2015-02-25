@@ -84,8 +84,7 @@ $(function()
             {
                 $("#chatMsgs").append("<div class='card-panel blue-grey lighten-5'> " +
                         "<div class='media-body'>" +
-                            "<small class='pull-right time'><i class='fa fa-clock-o'></i> " + message.split('<sep>')[1] + "</small>" +
-                            "<h6 class='media-heading'>" + message.split('<sep>')[0] + "</h6>" +
+                            "<h6 class='media-heading'>" + message.split('<sep>')[0] + " <small class='pull-right time'><i class='fa fa-clock-o'></i> " + message.split('<sep>')[1] + "</small></h6>" +
                             "<small class='col-lg-10'>" + message.split('<sep>')[2] + "</small>" +
                         "</div>" +
                     "</div>");
@@ -94,8 +93,7 @@ $(function()
             {
                 $("#chatMsgs").append("<div class='card-panel orange lighten-5'> " +
                 "<div class='media-body'>" +
-                "<small class='pull-right time'><i class='fa fa-clock-o'></i> " + message.split('<sep>')[1] + "</small>" +
-                "<h6 class='media-heading'>" + message.split('<sep>')[0] + "</h6>" +
+                "<h6 class='media-heading'>" + message.split('<sep>')[0] + " <small class='pull-right time'><i class='fa fa-clock-o'></i> " + message.split('<sep>')[1] + "</small></h6>" +
                 "<small class='col-lg-10'>" + message.split('<sep>')[2] + "</small>" +
                 "</div>" +
                 "</div>");
