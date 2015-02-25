@@ -4,8 +4,13 @@ $(document).ready(function()
 {
     manageSessions.unset("login");
 
+    var height = $(window).height() - 200 + "px";
+    $('#containerMainMsg, .msg-wrap').css('height', height);
+    console.warn(height);
     $(window).resize(function(){
-        console.log($(window).height());
+        console.log(height);
+        height = $(window).height() - 200 + "px";
+        $('#containerMainMsg, .msg-wrap').css('height', height);
     });
 });
 
@@ -217,7 +222,7 @@ function showModal(title,message,showClose)
         //$("#formModal").modal({show:true, backdrop: 'static', keyboard: true });
         $("#formModal").openModal({
           dismissible: false, // Modal can be dismissed by clicking outside of the modal
-          opacity: 2
+          opacity: .5
         }
       );
     }

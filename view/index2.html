@@ -39,7 +39,7 @@
 	    {
 	        padding:10px;
 	        min-height: 200px;
-	        max-height: 400px;
+	        max-height: 100%;
 	        height: 400px;
 	    }
 
@@ -171,6 +171,12 @@
 		#containerMainMsg{
 			width: 100%;
 		}
+
+		@media screen and (min-width: 993px), screen and (max-height: 979px;){
+			#containerMainMsg, .msg-wrap{
+				height: 780px !important;
+			}
+		}
 	</style>
     <!-- Bootstrap -->
     <!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
@@ -184,14 +190,6 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <!-- <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script> -->
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/javascripts/function2.js"></script>
-    <script src="/javascripts/materialize.min.js"></script>
 </head>
 <body>
 
@@ -255,6 +253,12 @@
         </div>
       </div>
     </div>
+
+	<!-- jQuery (necessary for Materialize's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/javascripts/function2.js"></script>
+    <script src="/javascripts/materialize.min.js"></script>
     <script type="text/javascript">
     	$(function(){
     		$('.button-collapse').sideNav({menuWidth: 240, activationWidth: 70});
