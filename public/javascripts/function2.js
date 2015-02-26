@@ -1,4 +1,5 @@
-var socket = io.connect('http://192.168.123.140:5000');
+console.log(location.host);
+var socket = io.connect('http://'+location.host);
 
 $(document).ready(function()
 {
@@ -6,9 +7,9 @@ $(document).ready(function()
 
     var height = $(window).height() - 200 + "px";
     $('#containerMainMsg, .msg-wrap').css('height', height);
-    console.warn(height);
+    //console.warn(height);
     $(window).resize(function(){
-        console.log(height);
+        //console.log(height);
         height = $(window).height() - 200 + "px";
         $('#containerMainMsg, .msg-wrap').css('height', height);
     });
@@ -104,7 +105,7 @@ $(function()
                 "<div class='media-body'>" +
                 "<h6 class='media-heading'>" + message.split('<sep>')[0] + " <small class='pull-right time'><i class='fa fa-clock-o'></i> " + message.split('<sep>')[1] + "</small></h6>" +
                 "<small class='col-lg-10'>" + message.split('<sep>')[2] + "</small>" +
-                "<a href='' title='Denunciar Mensagem'><small style='float: right; color:#b71c1c;'><i class='tiny mdi-communication-dnd-on' style=''></i></small></a>" +
+                "<a href='javascript: denounceMsg(\""+message+"\")' title='Denunciar Mensagem'><small style='float: right; color:#b71c1c;'><i class='tiny mdi-communication-dnd-on' style=''></i></small></a>" +
                 "</div>" +
                 "</div>");
             }

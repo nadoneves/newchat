@@ -84,7 +84,7 @@ io.sockets.on('connection', function(socket)
     // Com socket.emit, a mensagem é para mim
 		socket.emit("refreshChat", "msg", "Eu<sep>"+ DataHora() + "<sep>" + message);
     // Com socket.broadcast.emit, é para outros usuários
-		socket.broadcast.emit("refreshChat", "msg", socket.username + "<sep>" + DataHora() + "<sep>" + message);
+		socket.broadcast.emit("refreshChat", "msg", socket.username + "<sep>" + DataHora() + "<sep>" + message + "<sep>" + socket.ip);
 
 		var msg = socket.username +" ("+ socket.ip + ")||" + DataHora() +" diz: " + message + "  ENDMSG\n";
 		fs.readFile('logs/messages.log', function(err, data){

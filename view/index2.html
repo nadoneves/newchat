@@ -208,10 +208,13 @@
 			<div class="container">
 				<div class="row">
 					<span style="font-size: 20px">NewChat</span><small style="color: #555">beta</small>
-					<a href="#" title="Bug Report" style="color: #d32f2f">
+					<a href="javascript: help();" title="Bug Report" style="color: #fff">
+						<i class="small mdi-communication-live-help" style="float:right; margin-top: -10px"></i>
+					</a>
+					<a href="javascript: bugReport();" title="Bug Report" style="color: #fff">
 						<i class="small mdi-action-bug-report" style="float:right; margin-top: -10px"></i>
 					</a>
-					<a href="#" title="Install Android" style="color: #4caf50">
+					<a href="javascript: void(0);" title="Install Android" style="color: #fff">
 						<i class="small mdi-action-android" style="float:right; margin-top: -10px"></i>
 					</a>
 				</div>
@@ -265,6 +268,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/javascripts/function2.js"></script>
+	<script src="/javascripts/others.js"></script>
     <script src="/javascripts/materialize.min.js"></script>
     <script type="text/javascript">
     	$(function(){
