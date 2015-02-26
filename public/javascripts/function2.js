@@ -210,7 +210,7 @@ function SendMessage(p)
 
 function showModal(title,message,showClose)
 {
-    console.log(showClose)
+    //console.log(showClose)
     $("h2.title-modal").text(title).css({"text-align":"center"});
     $("p.formModal").html(message);
     if(showClose == "true")
