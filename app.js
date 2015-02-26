@@ -127,4 +127,18 @@ io.sockets.on('connection', function(socket)
 		    }
 		});
 	});
+
+	socket.on("sendbug", function(message){
+		var msg = socket.username + "(" + socket.ip + ")||" + DataHora() + " " + message + " ENDBUG\n";
+		fs.readFile('logs/bugs.log', function(err, data){
+			if(err){ throw err; }
+			else
+			{
+				fs.writeFile('logs/bugs.log', data + msg, function(err){
+					if(err){ throw err; }
+					socket.emit("sentBug");
+				});
+			}
+		});
+	});
 });

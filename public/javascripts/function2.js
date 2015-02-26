@@ -138,6 +138,10 @@ $(function()
         }
     });
 
+    socket.on("sentBug", function(){
+        $("textarea#descBug").after("<div class='card-panel green'><i class='small mdi-action-done' style=''></i> Obrigado por nos ajudar.</div>").focus();
+    });
+
     $('.sendMsg').on("click", function()
     {
         SendMessage("texto");
@@ -225,6 +229,7 @@ function showModal(title,message,showClose)
     else
     {
         //$("#formModal").modal({show:true, backdrop: 'static', keyboard: true });
+        $(".modal-footer").html("");
         $("#formModal").openModal({
           dismissible: false, // Modal can be dismissed by clicking outside of the modal
           opacity: .5
