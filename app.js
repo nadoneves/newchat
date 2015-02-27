@@ -33,6 +33,16 @@ function DataHora()
 	return dia + " " + Hoje.getHours() + ":" + Hoje.getMinutes() + ":" + Hoje.getSeconds();
 }
 
+function fts_antixss(string1)
+{
+  tam = string1.length;
+
+  string2 = string1.replace(/</g,"&#60");
+  string1 = string2.replace(/>/g,"&#62");
+
+  return string1;
+}
+
 // Para conectar um usuário || socket, este evento é predefinido pelo socketio
 io.sockets.on('connection', function(socket)
 {
@@ -78,15 +88,21 @@ io.sockets.on('connection', function(socket)
   // Mensagem escrita na caixa
 	socket.on('addNewMessage', function(message)
 	{
-    // Nós passar um parâmetro, que é a mensagem escrita no bate-papo,
-    // Fazemos isso quando o usuário pressiona o botão para enviar uma nova mensagem ao chat
+		var m = message.split('::');
+		var msgFinal = "";
+	    if(m[0] == "img")
+			msgFinal = "<img src='"+fts_antixss(m[1])+"'>";
+	    else if(m[0] == "youtube")
+			msgFinal = "<iframe width='420' height='315' src='"+fts_antixss(m[1].replace('watch?v=', 'embed/'))+"?rel=0&controls=0&showinfo=0' frameborder='0' allowfullscreen></iframe>";
+	    else
+			msgFinal = fts_antixss(message);
 
-    // Com socket.emit, a mensagem é para mim
-		socket.emit("refreshChat", "msg", "Eu<sep>"+ DataHora() + "<sep>" + message);
+
+		socket.emit("refreshChat", "msg", "Eu<sep>"+ DataHora() + "<sep>" + msgFinal);
     // Com socket.broadcast.emit, é para outros usuários
-		socket.broadcast.emit("refreshChat", "msg", socket.username + "<sep>" + DataHora() + "<sep>" + message + "<sep>" + socket.ip);
+		socket.broadcast.emit("refreshChat", "msg", socket.username + "<sep>" + DataHora() + "<sep>" + msgFinal + "<sep>" + socket.ip);
 
-		var msg = socket.username +" ("+ socket.ip + ")||" + DataHora() +" diz: " + message + "  ENDMSG\n";
+		var msg = socket.username +" ("+ socket.ip + ")||" + DataHora() +" diz: " + msgFinal + "  ENDMSG\n";
 		fs.readFile('logs/messages.log', function(err, data){
 		    if(err){ throw err; }
 		    else
@@ -131,12 +147,15 @@ io.sockets.on('connection', function(socket)
 	socket.on("sendbug", function(message){
 		var msg = socket.username + "(" + socket.ip + ")||" + DataHora() + " " + message + " ENDBUG\n";
 		fs.readFile('logs/bugs.log', function(err, data){
-			if(err){ throw err; }
+			if(err){ socket.emit("sentBug", false); }
 			else
 			{
 				fs.writeFile('logs/bugs.log', data + msg, function(err){
-					if(err){ throw err; }
-					socket.emit("sentBug");
+					if(err){
+						socket.emit("sentBug", false);
+						//throw err;
+					}
+					socket.emit("sentBug", true);
 				});
 			}
 		});

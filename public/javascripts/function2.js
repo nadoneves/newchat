@@ -138,72 +138,38 @@ $(function()
         }
     });
 
-    socket.on("sentBug", function(){
-        $("textarea#descBug").after("<div class='card-panel green'><i class='small mdi-action-done' style=''></i> Obrigado por nos ajudar.</div>").focus();
+    socket.on("sentBug", function(status){
+        if(status)
+        {
+            $("textarea#descBug").after("<div class='card-panel green'><i class='small mdi-action-done' style=''></i> Obrigado por nos ajudar.</div>").focus();
+        }
+        else
+        {
+            $("textarea#descBug").after("<div class='card-panel red accent-2'><i class='small mdi-action-report-problem' style=''></i> Erro ao tentar enviar.</div>").focus();
+        }
     });
 
     $('.sendMsg').on("click", function()
     {
-        SendMessage("texto");
-    });
-
-    $('.sendImg').on("click", function()
-    {
-        SendMessage("img");
-    });
-
-    $('.sendVideo').on("click", function()
-    {
-        SendMessage("video");
+        SendMessage();
     });
 
     $('.message').on('keypress', function(e) {
         if ( e.which == 13 ) {
-            SendMessage("texto");
+            SendMessage();
         }
     });
-    $('.messageImg').on('keypress', function(e) {
-        if ( e.which == 13 ) {
-            SendMessage("img");
-        }
-    });
-    $('.messageVideo').on('keypress', function(e) {
-        if ( e.which == 13 ) {
-            SendMessage("video");
-        }
-    });
-
 });
 
-function fts_antixss(string1)
+
+
+function SendMessage()
 {
-  tam = string1.length;
-
-  string2 = string1.replace(/</g,"&#60");
-  string1 = string2.replace(/>/g,"&#62");
-
-  return string1;
-}
-
-function SendMessage(p)
-{
-    var message = "";
-    if(p == "img")
-        message = "<img src='"+fts_antixss($(".messageImg").val())+"'>";
-    else if(p == "video")
-        message = "<iframe width='420' height='315' src='"+fts_antixss($(".messageVideo").val().replace('watch?v=', 'embed/'))+"?rel=0&controls=0&showinfo=0' frameborder='0' allowfullscreen></iframe>";
-    else
-        message = fts_antixss($(".message").val());
-
+    var message = $(".message").val();
     if(message.length >= 2)
     {
         socket.emit("addNewMessage", message);
-        if(p == "img")
-            $(".messageImg").val("");
-        else if(p == "video")
-            $(".messageVideo").val("");
-        else
-            $(".message").val("");
+        $(".message").val("");
     }
     else
     {
