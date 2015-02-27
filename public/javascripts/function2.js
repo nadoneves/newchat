@@ -1,4 +1,3 @@
-console.log(location.host);
 var socket = io.connect('http://'+location.host);
 
 $(document).ready(function()
@@ -101,7 +100,7 @@ $(function()
             }
             else
             {
-                $("#chatMsgs").append("<div class='card-panel orange lighten-5'> " +
+                $("#chatMsgs").append("<div id='"+Math.floor((Math.random() * Date.now()) + 1)+"' class='card-panel orange lighten-5'>" +
                 "<div class='media-body'>" +
                 "<h6 class='media-heading'>" + message.split('<sep>')[0] + " <small class='pull-right time'><i class='fa fa-clock-o'></i> " + message.split('<sep>')[1] + "</small></h6>" +
                 "<small class='col-lg-10'>" + message.split('<sep>')[2] + "</small>" +
@@ -146,6 +145,18 @@ $(function()
         else
         {
             $("textarea#descBug").after("<div class='card-panel red accent-2'><i class='small mdi-action-report-problem' style=''></i> Erro ao tentar enviar.</div>").focus();
+        }
+    });
+
+    socket.on("sentDenounce", function(status, divId){
+        if(status)
+        {
+            $("#"+divId).remove();
+            $("textarea#descDenounce").after("<div class='card-panel green'><i class='small mdi-action-done' style=''></i> Mensagem denunciada.</div>").focus();
+        }
+        else
+        {
+            $("textarea#descDenounce").after("<div class='card-panel red accent-2'><i class='small mdi-action-report-problem' style=''></i> Erro ao tentar enviar.</div>").focus();
         }
     });
 

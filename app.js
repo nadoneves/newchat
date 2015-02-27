@@ -38,7 +38,8 @@ function fts_antixss(string1)
   tam = string1.length;
 
   string2 = string1.replace(/</g,"&#60");
-  string1 = string2.replace(/>/g,"&#62");
+  string3 = string2.replace(/>/g,"&#62");
+  string1 = string2.replace(/'/g,"&#39");
 
   return string1;
 }
@@ -52,6 +53,10 @@ io.sockets.on('connection', function(socket)
 	{
     // Se existor o nome de usuário no bate-papo
 		if(usuariosOnline[username])
+		{
+			socket.username = username+"_" + Math.floor((Math.random() * Date.now()) + 1);
+		}
+		else if(username == "Eu" || username == "eu")
 		{
 			socket.username = username+"_" + Math.floor((Math.random() * Date.now()) + 1);
 		}
@@ -145,7 +150,7 @@ io.sockets.on('connection', function(socket)
 	});
 
 	socket.on("sendbug", function(message){
-		var msg = socket.username + "(" + socket.ip + ")||" + DataHora() + " " + message + " ENDBUG\n";
+		var msg = socket.username + "(" + socket.ip + ")||" + DataHora() + " " + fts_antixss(message) + " ENDBUG\n";
 		fs.readFile('logs/bugs.log', function(err, data){
 			if(err){ socket.emit("sentBug", false); }
 			else
@@ -156,6 +161,23 @@ io.sockets.on('connection', function(socket)
 						//throw err;
 					}
 					socket.emit("sentBug", true);
+				});
+			}
+		});
+	});
+
+	socket.on("senddenounce", function(desc, msgDenunciada, div){
+		var msg = socket.username + "(" + socket.ip + ")||" + DataHora() + " " + fts_antixss(desc) + " || " + msgDenunciada + " ENDDENOUNCE\n";
+		fs.readFile('logs/denounce.log', function(err, data){
+			if(err){ socket.emit("sentDenounce", false, ""); }
+			else
+			{
+				fs.writeFile('logs/denounce.log', data + msg, function(err){
+					if(err){
+						socket.emit("sentDenounce", false, "");
+						//throw err;
+					}
+					socket.emit("sentDenounce", true, div);
 				});
 			}
 		});

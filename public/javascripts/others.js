@@ -1,8 +1,31 @@
-function denounceMsg(p)
+function denounceMsg(denuncia)
 {
-    var m = p.split('<sep>');
-    showModal("Denunciar Mensagem", p, "true");
+    var m = denuncia.split('<sep>');
+
+    var a = $('a#denunciar');
+    var divParaOcultar  = a.context.activeElement.parentElement.parentElement.id;
+    var html = "";
+    html += "<div class='input-field col s12'>";
+    html += "<i class='tiny mdi-communication-dnd-on prefix'></i>";
+    html += "<textarea id='descDenounce' class='materialize-textarea'></textarea>";
+    html += "<label for='textarea1'>Descreva aqui o motivo da sua denuncia</label>";
+    html += "</div>";
+    html += '<button type="submit" class="btn btn-primary btn-large" onclick="javascript: sendDenounce(\''+divParaOcultar+'\',\''+denuncia+'\');">Enviar</button>';
+    html += '<button type="button" class="btn btn-primary btn-large" style="float:right" onclick="javascript: $(\'#formModal\').closeModal();">Fechar</button>';
+    showModal("Denunciar Mensagem", html, "false");
 }
+
+function sendDenounce(divParaOcultar, denuncia)
+{
+    if($('textarea#descDenounce').val() == "")
+    {
+        $("textarea#descDenounce").after("<div class='card-panel red accent-2'><i class='small mdi-action-report-problem' style=''></i> Descreva um motivo para a denúncia.</div>").focus();
+        return;
+    }
+    socket.emit("senddenounce", $('textarea#descDenounce').val(), denuncia, divParaOcultar);
+    $('textarea#descDenounce').val("");
+}
+
 
 function help()
 {
@@ -40,6 +63,6 @@ function sendBug()
         $("textarea#descBug").after("<div class='card-panel red accent-2'><i class='small mdi-action-report-problem' style=''></i> Descreva um bug para enviar.</div>").focus();
         return;
     }
-    socket.emit("sendbug", fts_antixss($('textarea#descBug').val()));
+    socket.emit("sendbug", $('textarea#descBug').val());
     $('textarea#descBug').val("");
 }
