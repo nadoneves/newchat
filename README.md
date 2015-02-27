@@ -21,7 +21,6 @@ Leonardo Neves
 - - - denounce.log
 - - - bugs.log
 - Executar **npm install**
-- Trocar o ip e porta no arquivo **function.js**
 
 # Usando
 
