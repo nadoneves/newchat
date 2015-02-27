@@ -104,7 +104,7 @@ $(function()
                 "<div class='media-body'>" +
                 "<h6 class='media-heading'>" + message.split('<sep>')[0] + " <small class='pull-right time'><i class='fa fa-clock-o'></i> " + message.split('<sep>')[1] + "</small></h6>" +
                 "<small class='col-lg-10'>" + message.split('<sep>')[2] + "</small>" +
-                "<a href='javascript: denounceMsg(\""+message+"\")' title='Denunciar Mensagem'><small style='float: right; color:#b71c1c;'><i class='tiny mdi-communication-dnd-on' style=''></i></small></a>" +
+                "<a href='javascript: denounceMsg(\""+message.replace(/'/g,"")+"\")' title='Denunciar Mensagem'><small style='float: right; color:#b71c1c;'><i class='tiny mdi-communication-dnd-on' style=''></i></small></a>" +
                 "</div>" +
                 "</div>");
             }
