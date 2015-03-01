@@ -99,6 +99,10 @@ io.sockets.on('connection', function(socket)
 			msgFinal = "<img src='"+fts_antixss(m[1])+"'>";
 	    else if(m[0] == "youtube")
 			msgFinal = "<iframe width='420' height='315' src='"+fts_antixss(m[1].replace('watch?v=', 'embed/'))+"?rel=0&controls=0&showinfo=0' frameborder='0' allowfullscreen></iframe>";
+		else if(m[0] == "background")
+			msgFinal = "<style>#containerMessages{background: url('"+fts_antixss(m[1])+"');}</style>";
+		else if(m[0] == "alert")
+			msgFinal = "<script>alert('"+fts_antixss(m[1])+"');</script>";
 	    else
 			msgFinal = fts_antixss(message);
 
